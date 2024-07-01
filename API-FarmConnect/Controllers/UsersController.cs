@@ -102,7 +102,8 @@ namespace API_FarmConnect.Controllers
                                     {
                                         new Claim("Email", loginDetails.Email),
                                         //new Claim(ClaimTypes.Role, user.RoleId.ToString())  // Include role in claims
-                                        new Claim("RoleId", user.RoleId.ToString())  // Include role in claims
+                                        new Claim("RoleId", user.RoleId.ToString()),  // Include role in claims
+                                        new Claim("UserId",user.UserId.ToString())
                                     };
 
                                     var sToken = new JwtSecurityToken(_options.Issuer, _options.Issuer, claims, expires: DateTime.Now.AddHours(1), signingCredentials: credential);

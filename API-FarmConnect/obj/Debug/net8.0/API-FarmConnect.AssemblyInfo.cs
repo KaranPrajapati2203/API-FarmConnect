@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("API-FarmConnect")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4fafe583a4eaa918757c07d20dba43a464c089aa")]
 [assembly: System.Reflection.AssemblyProductAttribute("API-FarmConnect")]
 [assembly: System.Reflection.AssemblyTitleAttribute("API-FarmConnect")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
