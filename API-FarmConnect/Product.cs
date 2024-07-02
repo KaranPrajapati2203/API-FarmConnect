@@ -11,6 +11,8 @@
         public string ProductImage { get; set; }
         public int SelectedQuantity { get; set; }
         public int MaxQuantity { get; set; }
+        public decimal AvailableQuantity { get; set; }
+        public bool IsNeeded { get; set; }
         public bool IsAvailable { get; set; }
         public DateTime CreatedAt { get; set; }
         public bool IsDeleted { get; set; }

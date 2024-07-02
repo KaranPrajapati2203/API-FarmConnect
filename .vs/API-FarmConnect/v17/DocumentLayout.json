@@ -3,20 +3,28 @@
   "WorkspaceRootPath": "D:\\API-FarmConnect\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{6630B6A1-30D9-43F3-82B5-F1D26EE415D1}|API-FarmConnect\\API-FarmConnect.csproj|d:\\api-farmconnect\\api-farmconnect\\controllers\\productscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6630B6A1-30D9-43F3-82B5-F1D26EE415D1}|API-FarmConnect\\API-FarmConnect.csproj|solutionrelative:api-farmconnect\\controllers\\productscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6630B6A1-30D9-43F3-82B5-F1D26EE415D1}|API-FarmConnect\\API-FarmConnect.csproj|d:\\api-farmconnect\\api-farmconnect\\productlisting.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6630B6A1-30D9-43F3-82B5-F1D26EE415D1}|API-FarmConnect\\API-FarmConnect.csproj|solutionrelative:api-farmconnect\\productlisting.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6630B6A1-30D9-43F3-82B5-F1D26EE415D1}|API-FarmConnect\\API-FarmConnect.csproj|d:\\api-farmconnect\\api-farmconnect\\productlistingrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6630B6A1-30D9-43F3-82B5-F1D26EE415D1}|API-FarmConnect\\API-FarmConnect.csproj|solutionrelative:api-farmconnect\\productlistingrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6630B6A1-30D9-43F3-82B5-F1D26EE415D1}|API-FarmConnect\\API-FarmConnect.csproj|d:\\api-farmconnect\\api-farmconnect\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6630B6A1-30D9-43F3-82B5-F1D26EE415D1}|API-FarmConnect\\API-FarmConnect.csproj|solutionrelative:api-farmconnect\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{6630B6A1-30D9-43F3-82B5-F1D26EE415D1}|API-FarmConnect\\API-FarmConnect.csproj|d:\\api-farmconnect\\api-farmconnect\\controllers\\marketcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{6630B6A1-30D9-43F3-82B5-F1D26EE415D1}|API-FarmConnect\\API-FarmConnect.csproj|solutionrelative:api-farmconnect\\controllers\\marketcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{6630B6A1-30D9-43F3-82B5-F1D26EE415D1}|API-FarmConnect\\API-FarmConnect.csproj|d:\\api-farmconnect\\api-farmconnect\\market.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6630B6A1-30D9-43F3-82B5-F1D26EE415D1}|API-FarmConnect\\API-FarmConnect.csproj|solutionrelative:api-farmconnect\\market.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{6630B6A1-30D9-43F3-82B5-F1D26EE415D1}|API-FarmConnect\\API-FarmConnect.csproj|d:\\api-farmconnect\\api-farmconnect\\controllers\\cartcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{6630B6A1-30D9-43F3-82B5-F1D26EE415D1}|API-FarmConnect\\API-FarmConnect.csproj|solutionrelative:api-farmconnect\\controllers\\cartcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{6630B6A1-30D9-43F3-82B5-F1D26EE415D1}|API-FarmConnect\\API-FarmConnect.csproj|d:\\api-farmconnect\\api-farmconnect\\controllers\\productscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6630B6A1-30D9-43F3-82B5-F1D26EE415D1}|API-FarmConnect\\API-FarmConnect.csproj|solutionrelative:api-farmconnect\\controllers\\productscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{6630B6A1-30D9-43F3-82B5-F1D26EE415D1}|API-FarmConnect\\API-FarmConnect.csproj|d:\\api-farmconnect\\api-farmconnect\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -30,7 +38,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 7,
           "Children": [
             {
               "$type": "Bookmark",
@@ -42,7 +50,46 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
+              "Title": "ProductListing.cs",
+              "DocumentMoniker": "D:\\API-FarmConnect\\API-FarmConnect\\ProductListing.cs",
+              "RelativeDocumentMoniker": "API-FarmConnect\\ProductListing.cs",
+              "ToolTip": "D:\\API-FarmConnect\\API-FarmConnect\\ProductListing.cs",
+              "RelativeToolTip": "API-FarmConnect\\ProductListing.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAxAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-02T12:42:24.337Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ProductListingRequest.cs",
+              "DocumentMoniker": "D:\\API-FarmConnect\\API-FarmConnect\\ProductListingRequest.cs",
+              "RelativeDocumentMoniker": "API-FarmConnect\\ProductListingRequest.cs",
+              "ToolTip": "D:\\API-FarmConnect\\API-FarmConnect\\ProductListingRequest.cs",
+              "RelativeToolTip": "API-FarmConnect\\ProductListingRequest.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-02T07:52:58.959Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Product.cs",
+              "DocumentMoniker": "D:\\API-FarmConnect\\API-FarmConnect\\Product.cs",
+              "RelativeDocumentMoniker": "API-FarmConnect\\Product.cs",
+              "ToolTip": "D:\\API-FarmConnect\\API-FarmConnect\\Product.cs",
+              "RelativeToolTip": "API-FarmConnect\\Product.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAAWAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-02T07:05:52.753Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
               "Title": "MarketController.cs",
               "DocumentMoniker": "D:\\API-FarmConnect\\API-FarmConnect\\Controllers\\MarketController.cs",
               "RelativeDocumentMoniker": "API-FarmConnect\\Controllers\\MarketController.cs",
@@ -55,20 +102,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Market.cs",
-              "DocumentMoniker": "D:\\API-FarmConnect\\API-FarmConnect\\Market.cs",
-              "RelativeDocumentMoniker": "API-FarmConnect\\Market.cs",
-              "ToolTip": "D:\\API-FarmConnect\\API-FarmConnect\\Market.cs",
-              "RelativeToolTip": "API-FarmConnect\\Market.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-01T12:30:19.647Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 5,
               "Title": "CartController.cs",
               "DocumentMoniker": "D:\\API-FarmConnect\\API-FarmConnect\\Controllers\\CartController.cs",
               "RelativeDocumentMoniker": "API-FarmConnect\\Controllers\\CartController.cs",
@@ -76,25 +110,24 @@
               "RelativeToolTip": "API-FarmConnect\\Controllers\\CartController.cs",
               "ViewState": "AQIAAAMAAAAAAAAAAAAAAFcAAAB8AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-01T09:07:47.482Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-07-01T09:07:47.482Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 0,
               "Title": "ProductsController.cs",
               "DocumentMoniker": "D:\\API-FarmConnect\\API-FarmConnect\\Controllers\\ProductsController.cs",
               "RelativeDocumentMoniker": "API-FarmConnect\\Controllers\\ProductsController.cs",
               "ToolTip": "D:\\API-FarmConnect\\API-FarmConnect\\Controllers\\ProductsController.cs",
               "RelativeToolTip": "API-FarmConnect\\Controllers\\ProductsController.cs",
-              "ViewState": "AQIAAMEAAAAAAAAAAAAmwB4AAAAUAAAA",
+              "ViewState": "AQIAAPgAAAAAAAAAAAAcwA0BAABiAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-07-01T04:54:51.119Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 6,
               "Title": "UsersController.cs",
               "DocumentMoniker": "D:\\API-FarmConnect\\API-FarmConnect\\Controllers\\UsersController.cs",
               "RelativeDocumentMoniker": "API-FarmConnect\\Controllers\\UsersController.cs",
@@ -102,8 +135,7 @@
               "RelativeToolTip": "API-FarmConnect\\Controllers\\UsersController.cs",
               "ViewState": "AQIAAFMAAAAAAAAAAAAwwGkAAAA4AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-25T06:46:04.183Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-06-25T06:46:04.183Z"
             }
           ]
         }

@@ -42,8 +42,9 @@ namespace API_FarmConnect.Controllers
                                     ProductTypeId = reader.GetInt64(reader.GetOrdinal("ProductTypeId")),
                                     ProductMeasureType = reader.GetString(reader.GetOrdinal("ProductMeasureType")),
                                     ProductImage = reader.GetString(reader.GetOrdinal("ProductImage")),
-                                    SelectedQuantity = reader.GetInt32(reader.GetOrdinal("SelectedQuantity")),
                                     MaxQuantity = reader.GetInt32(reader.GetOrdinal("MaxQuantity")),
+                                    AvailableQuantity = reader.GetInt32(reader.GetOrdinal("AvailableQuantity")),
+                                    IsNeeded = reader.GetBoolean(reader.GetOrdinal("IsNeeded")),
                                     IsAvailable = reader.GetBoolean(reader.GetOrdinal("IsAvailable")),
                                     CreatedAt = reader.GetDateTime(reader.GetOrdinal("CreatedAt"))
                                 });
@@ -88,6 +89,8 @@ namespace API_FarmConnect.Controllers
                                     ProductMeasureType = reader.GetString(reader.GetOrdinal("ProductMeasureType")),
                                     ProductImage = reader.GetString(reader.GetOrdinal("ProductImage")),
                                     MaxQuantity = reader.GetInt32(reader.GetOrdinal("MaxQuantity")),
+                                    AvailableQuantity = reader.GetInt32(reader.GetOrdinal("AvailableQuantity")),
+                                    IsNeeded = reader.GetBoolean(reader.GetOrdinal("IsNeeded")),
                                     IsAvailable = reader.GetBoolean(reader.GetOrdinal("IsAvailable")),
                                     CreatedAt = reader.GetDateTime(reader.GetOrdinal("CreatedAt"))
                                 };
@@ -117,8 +120,8 @@ namespace API_FarmConnect.Controllers
                 {
                     await connection.OpenAsync();
 
-                    var insertProductSql = "INSERT INTO Products (ProductName, ProductDescription, ProductPrice, ProductTypeId, ProductMeasureType, ProductImage, MaxQuantity, IsAvailable) " +
-                                           "VALUES (@ProductName, @ProductDescription, @ProductPrice, @ProductTypeId, @ProductMeasureType, @ProductImage, @MaxQuantity, @IsAvailable)";
+                    var insertProductSql = "INSERT INTO Products (ProductName, ProductDescription, ProductPrice, ProductTypeId, ProductMeasureType, ProductImage, MaxQuantity, AvailableQuantity, IsNeeded, IsAvailable) " +
+                                            "VALUES (@ProductName, @ProductDescription, @ProductPrice, @ProductTypeId, @ProductMeasureType, @ProductImage, @MaxQuantity, @AvailableQuantity, @IsNeeded, @IsAvailable)";
                     using (var cmd = new NpgsqlCommand(insertProductSql, connection))
                     {
                         cmd.Parameters.AddWithValue("@ProductName", product.ProductName);
@@ -128,6 +131,8 @@ namespace API_FarmConnect.Controllers
                         cmd.Parameters.AddWithValue("@ProductMeasureType", product.ProductMeasureType);
                         cmd.Parameters.AddWithValue("@ProductImage", product.ProductImage);
                         cmd.Parameters.AddWithValue("@MaxQuantity", product.MaxQuantity);
+                        cmd.Parameters.AddWithValue("@AvailableQuantity", product.AvailableQuantity);
+                        cmd.Parameters.AddWithValue("@IsNeeded", product.IsNeeded);
                         cmd.Parameters.AddWithValue("@IsAvailable", product.IsAvailable);
 
                         await cmd.ExecuteNonQueryAsync();
@@ -152,7 +157,7 @@ namespace API_FarmConnect.Controllers
                     await connection.OpenAsync();
 
                     var updateProductSql = "UPDATE Products SET ProductName = @ProductName, ProductDescription = @ProductDescription, ProductPrice = @ProductPrice, ProductTypeId = @ProductTypeId, " +
-                                           "ProductMeasureType = @ProductMeasureType, ProductImage = @ProductImage, MaxQuantity = @MaxQuantity, IsAvailable = @IsAvailable " +
+                                           "ProductMeasureType = @ProductMeasureType, ProductImage = @ProductImage, MaxQuantity = @MaxQuantity, AvailableQuantity = @AvailableQuantity, IsNeeded = @IsNeeded, IsAvailable = @IsAvailable " +
                                            "WHERE ProductId = @ProductId AND IsDeleted = FALSE";
                     using (var cmd = new NpgsqlCommand(updateProductSql, connection))
                     {
@@ -164,6 +169,8 @@ namespace API_FarmConnect.Controllers
                         cmd.Parameters.AddWithValue("@ProductMeasureType", product.ProductMeasureType);
                         cmd.Parameters.AddWithValue("@ProductImage", product.ProductImage);
                         cmd.Parameters.AddWithValue("@MaxQuantity", product.MaxQuantity);
+                        cmd.Parameters.AddWithValue("@AvailableQuantity", product.AvailableQuantity);
+                        cmd.Parameters.AddWithValue("@IsNeeded", product.IsNeeded);
                         cmd.Parameters.AddWithValue("@IsAvailable", product.IsAvailable);
 
                         var rowsAffected = await cmd.ExecuteNonQueryAsync();
@@ -183,6 +190,98 @@ namespace API_FarmConnect.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, new { message = $"Error: {ex.Message}" });
             }
         }
+
+        [HttpPost("listings")]
+        public async Task<IActionResult> AddProductListing([FromBody] ProductListingRequest request)
+        {
+            try
+            {
+                using (var connection = new NpgsqlConnection(_connectionString))
+                {
+                    await connection.OpenAsync();
+
+                    // Insert into ProductListings table
+                    var insertListingSql = "INSERT INTO ProductListings (SellerId, ProductId, ListingQuantity) " +
+                                           "VALUES (@SellerId, @ProductId, @ListingQuantity) RETURNING ListingId";
+                    long newListingId;
+                    using (var cmd = new NpgsqlCommand(insertListingSql, connection))
+                    {
+                        cmd.Parameters.AddWithValue("@SellerId", request.SellerId);
+                        cmd.Parameters.AddWithValue("@ProductId", request.ProductId);
+                        cmd.Parameters.AddWithValue("@ListingQuantity", request.ListingQuantity);
+
+                        // Get the new listing ID generated by the RETURNING clause
+                        newListingId = (long)await cmd.ExecuteScalarAsync();
+                    }
+
+                    // Update AvailableQuantity in Products table
+                    var updateProductSql = "UPDATE Products SET AvailableQuantity = AvailableQuantity + @ListingQuantity " +
+                                           "WHERE ProductId = @ProductId AND IsDeleted = FALSE AND IsAvailable = TRUE";
+                    using (var cmd = new NpgsqlCommand(updateProductSql, connection))
+                    {
+                        cmd.Parameters.AddWithValue("@ProductId", request.ProductId);
+                        cmd.Parameters.AddWithValue("@ListingQuantity", request.ListingQuantity);
+
+                        await cmd.ExecuteNonQueryAsync();
+                    }
+
+                    return Ok(new { message = "Product listed successfully.", listingId = newListingId });
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, new { message = $"Error: {ex.Message}" });
+            }
+        }
+
+        [HttpGet("user/{userId}/listings")]
+        public async Task<IActionResult> GetListingsByUserId(long userId)
+        {
+            try
+            {
+                using (var connection = new NpgsqlConnection(_connectionString))
+                {
+                    await connection.OpenAsync();
+
+                    var listings = new List<ProductListing>();
+
+                    var getListingsSql = "SELECT pl.*, p.ProductName, p.ProductPrice, p.ProductImage, p.AvailableQuantity " +
+                                         "FROM ProductListings pl " +
+                                         "JOIN Products p ON pl.ProductId = p.ProductId " +
+                                         "WHERE pl.SellerId = @UserId AND pl.IsDeleted = FALSE";
+
+                    using (var cmd = new NpgsqlCommand(getListingsSql, connection))
+                    {
+                        cmd.Parameters.AddWithValue("@UserId", userId);
+
+                        using (var reader = await cmd.ExecuteReaderAsync())
+                        {
+                            while (await reader.ReadAsync())
+                            {
+                                listings.Add(new ProductListing
+                                {
+                                    ListingId = reader.GetInt64(reader.GetOrdinal("ListingId")),
+                                    SellerId = reader.GetInt64(reader.GetOrdinal("SellerId")),
+                                    ProductId = reader.GetInt64(reader.GetOrdinal("ProductId")),
+                                    ProductName = reader.GetString(reader.GetOrdinal("ProductName")),
+                                    ProductPrice = reader.GetDecimal(reader.GetOrdinal("ProductPrice")),
+                                    ProductImage = reader.GetString(reader.GetOrdinal("ProductImage")),
+                                    ListingQuantity = reader.GetDecimal(reader.GetOrdinal("ListingQuantity")),
+                                    CreatedAt = reader.GetDateTime(reader.GetOrdinal("CreatedAt"))
+                                });
+                            }
+                        }
+                    }
+
+                    return Ok(listings);
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, new { message = $"Error: {ex.Message}" });
+            }
+        }
+
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteProduct(long id)
