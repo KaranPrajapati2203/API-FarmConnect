@@ -96,16 +96,17 @@ CREATE TABLE ProductListings (
     ListingId BIGSERIAL PRIMARY KEY,
     SellerId BIGINT NOT NULL,
     ProductId BIGINT NOT NULL,
+    ProductMeasureType VARCHAR(10) NOT NULL,
     --MarketId BIGINT NOT NULL,
     --ListingPrice DECIMAL(10, 2) NOT NULL,
-    ListingQuantity INT NOT NULL,
+    ListingQuantity DECIMAL(10,2) NOT NULL,
     CreatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     IsDeleted BOOLEAN DEFAULT FALSE,
     FOREIGN KEY (SellerId) REFERENCES Users(UserId),
     FOREIGN KEY (ProductId) REFERENCES Products(ProductId)
     --FOREIGN KEY (MarketId) REFERENCES Marketplaces(MarketId)
 );
-
+DROP TABLE ProductListings
 CREATE TABLE Cart (
     CartId BIGSERIAL PRIMARY KEY,
     UserId BIGINT NOT NULL,

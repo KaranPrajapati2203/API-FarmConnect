@@ -8,6 +8,8 @@
         public string ProductName { get; set; }
         public decimal ProductPrice { get; set; }
         public string ProductImage { get; set; }
+        public string ProductMeasureType { get; set; }
+
         public decimal ListingQuantity { get; set; }
         public DateTime CreatedAt { get; set; }
     }
