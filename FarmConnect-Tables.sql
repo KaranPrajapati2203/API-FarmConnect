@@ -118,6 +118,48 @@ CREATE TABLE Cart (
     FOREIGN KEY (ProductId) REFERENCES Products(ProductId)
 );
 drop table cart
+---------------------------------------------------------------------------------------------------------
+CREATE TABLE Orders (
+    OrderId BIGSERIAL PRIMARY KEY,
+    UserId BIGINT NOT NULL,
+    TotalAmount DECIMAL(10, 2) NOT NULL,
+    OrderDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    OrderStatus VARCHAR(50) DEFAULT 'Pending',
+    CreatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    IsDeleted BOOLEAN DEFAULT FALSE,
+    FOREIGN KEY (UserId) REFERENCES Users(UserId)
+);
+CREATE TABLE OrderItems (
+    OrderItemId BIGSERIAL PRIMARY KEY,
+    OrderId BIGINT NOT NULL,
+    ProductId BIGINT NOT NULL,
+    Quantity DECIMAL(10, 2) NOT NULL,
+    Price DECIMAL(10, 2) NOT NULL,
+    CreatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (OrderId) REFERENCES Orders(OrderId),
+    FOREIGN KEY (ProductId) REFERENCES Products(ProductId)
+);
+drop table Orders
+drop table OrderItems
+INSERT INTO Orders (OrderId, UserId, OrderDate, TotalAmount)
+VALUES
+    (1, 8, '2024-07-03', 240.00), -- Updated total amount
+    (2, 8, '2024-07-04', 440.00), -- Updated total amount
+    (3, 8, '2024-07-05', 230.00), -- Updated total amount
+    (4, 8, '2024-07-06', 260.00); -- Updated total amount
+
+INSERT INTO OrderItems (OrderItemId, OrderId, ProductId, Quantity, Price)
+VALUES
+    (1, 1, 1, 2, 120.00), -- Organic Apples
+    (2, 1, 2, 1, 90.00), -- Fresh Carrots
+    (3, 2, 3, 4, 50.00), -- Dairy Milk
+    (4, 2, 4, 2, 150.00), -- Fresh Strawberries
+    (5, 3, 5, 1, 80.00), -- Organic Broccoli
+    (6, 3, 6, 3, 200.00), -- Fresh Oranges
+    (7, 4, 7, 2, 70.00), -- Organic Tomatoes
+    (8, 4, 8, 2, 60.00); -- Fresh Spinach
+
+---------------------------------------------------------------------------------------------------------
 CREATE TABLE Orders (
     OrderId BIGSERIAL PRIMARY KEY,
     UserId BIGINT NOT NULL,

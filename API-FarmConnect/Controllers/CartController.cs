@@ -163,5 +163,97 @@ namespace API_FarmConnect.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, new { message = $"Error: {ex.Message}" });
             }
         }
+
+        [HttpPost("checkout/{userId}")]
+        public async Task<IActionResult> Checkout(long userId)
+        {
+            try
+            {
+                using (var connection = new NpgsqlConnection(_connectionString))
+                {
+                    await connection.OpenAsync();
+
+                    // Calculate total amount from cart
+                    var totalAmount = 0.0;
+                    var getOrderItemsSql = @"
+                SELECT c.ProductId, c.Quantity, p.ProductPrice
+                FROM Cart c
+                JOIN Products p ON c.ProductId = p.ProductId
+                WHERE c.UserId = @UserId";
+
+                    var orderItems = new List<OrderItem>();
+
+                    using (var cmd = new NpgsqlCommand(getOrderItemsSql, connection))
+                    {
+                        cmd.Parameters.AddWithValue("@UserId", userId);
+                        using (var reader = await cmd.ExecuteReaderAsync())
+                        {
+                            while (await reader.ReadAsync())
+                            {
+                                var productId = reader.GetInt64(reader.GetOrdinal("ProductId"));
+                                var quantity = reader.GetDecimal(reader.GetOrdinal("Quantity"));
+                                var price = reader.GetDecimal(reader.GetOrdinal("ProductPrice"));
+
+                                orderItems.Add(new OrderItem
+                                {
+                                    ProductId = productId,
+                                    Quantity = quantity,
+                                    Price = price
+                                });
+
+                                totalAmount += (double)(price * quantity);
+                            }
+                        }
+                    }
+
+                    // Insert into Orders table
+                    var insertOrderSql = @"
+                INSERT INTO Orders (UserId, TotalAmount)
+                VALUES (@UserId, @TotalAmount)
+                RETURNING OrderId";
+
+                    long orderId;
+                    using (var cmd = new NpgsqlCommand(insertOrderSql, connection))
+                    {
+                        cmd.Parameters.AddWithValue("@UserId", userId);
+                        cmd.Parameters.AddWithValue("@TotalAmount", totalAmount);
+                        orderId = (long)await cmd.ExecuteScalarAsync();
+                    }
+
+                    // Insert into OrderItems table
+                    var insertOrderItemsSql = @"
+                INSERT INTO OrderItems (OrderId, ProductId, Quantity, Price)
+                VALUES (@OrderId, @ProductId, @Quantity, @Price)";
+
+                    foreach (var item in orderItems)
+                    {
+                        using (var cmd = new NpgsqlCommand(insertOrderItemsSql, connection))
+                        {
+                            cmd.Parameters.AddWithValue("@OrderId", orderId);
+                            cmd.Parameters.AddWithValue("@ProductId", item.ProductId);
+                            cmd.Parameters.AddWithValue("@Quantity", item.Quantity);
+                            cmd.Parameters.AddWithValue("@Price", item.Price);
+                            await cmd.ExecuteNonQueryAsync();
+                        }
+                    }
+
+                    // Delete cart items after successful checkout
+                    var deleteCartSql = "DELETE FROM Cart WHERE UserId = @UserId";
+                    using (var cmd = new NpgsqlCommand(deleteCartSql, connection))
+                    {
+                        cmd.Parameters.AddWithValue("@UserId", userId);
+                        await cmd.ExecuteNonQueryAsync();
+                    }
+
+                    return Ok(new { message = "Checkout successful." });
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, new { message = $"Error: {ex.Message}" });
+            }
+        }
+
+
     }
 }
