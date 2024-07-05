@@ -68,6 +68,22 @@ VALUES
 
 DROP TABLE products
 DROP TABLE Marketplaces
+
+update Marketplaces set MarketImageUrl='https://dynamic-media-cdn.tripadvisor.com/media/photo-o/15/d3/c2/93/popular-market.jpg?w=1200&h=-1&s=1' where MarketId=1;
+update Marketplaces set MarketImageUrl='https://images.unsplash.com/photo-1572402123736-c79526db405a?fm=jpg&w=3000&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fG1hcmtldHxlbnwwfHwwfHx8MA%3D%3D' where MarketId=2;
+update Marketplaces set MarketImageUrl='https://www.schwab.com/sites/g/files/eyrktu1071/files/Getty_635946862_2x1.jpg' where MarketId=3;
+update Marketplaces set MarketImageUrl='https://cdn.pixabay.com/photo/2024/02/19/07/54/farmers-local-market-8582783_640.jpg' where MarketId=4;
+update Marketplaces set MarketImageUrl='https://www.treehugger.com/thmb/Ih1TNwrrqqzayy8NZ4XWK4aTK4s=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/assorted-fruits-and-vegetables-at-the-farmer-s-market-in-vienna--austria-695527058-67c93b8f4ce345d097380b046b4e05a2.jpg' where MarketId=5;
+update Marketplaces set MarketImageUrl='https://seoulsearching.net/wp-content/uploads/2021/01/img_7592b.jpg' where MarketId=6;
+
+UPDATE Marketplaces SET MarketName = 'Kalupur Market', MarketLatitude = 23.0247, MarketLongitude = 72.6027, MarketAddress = 'Kalupur, Ahmedabad' WHERE MarketName = 'Shree Organic Farms';
+UPDATE Marketplaces SET MarketName = 'Jamalpur Market', MarketLatitude = 23.0095, MarketLongitude = 72.5825, MarketAddress = 'Jamalpur, Ahmedabad' WHERE MarketName = 'Swastik Farm';
+UPDATE Marketplaces SET MarketName = 'Shyamal Market', MarketLatitude = 23.0204, MarketLongitude = 72.5300, MarketAddress = 'Shyamal, Ahmedabad' WHERE MarketName = 'Ranip Market';
+UPDATE Marketplaces SET MarketName = 'Geeta Mandir Market', MarketLatitude = 23.0170, MarketLongitude = 72.5736, MarketAddress = 'Astodia, Ahmedabad' WHERE MarketName = 'Organic Mandala';
+UPDATE Marketplaces SET MarketName = 'Vasna Market Yard', MarketLatitude = 22.9996, MarketLongitude = 72.5600, MarketAddress = 'Vasna, Ahmedabad' WHERE MarketName = 'Farm Fresh India';
+UPDATE Marketplaces SET MarketName = 'Naroda Vegetable Market', MarketLatitude = 23.0827, MarketLongitude = 72.6486, MarketAddress = 'Naroda, Ahmedabad' WHERE MarketName = 'Hariyali Farms';
+UPDATE Marketplaces SET MarketName = 'Raipur Market', MarketLatitude = 23.0225, MarketLongitude = 72.5705, MarketAddress = 'Raipur, Ahmedabad' WHERE MarketName = 'Swasthya Harvest';
+
 CREATE TABLE Marketplaces (
     MarketId BIGSERIAL PRIMARY KEY,
     MarketName VARCHAR(100) NOT NULL,

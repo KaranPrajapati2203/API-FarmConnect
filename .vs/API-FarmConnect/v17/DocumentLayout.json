@@ -58,8 +58,7 @@
               "RelativeToolTip": "API-FarmConnect\\OrderItem.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAA4AAAAwAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-04T05:03:42.786Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-07-04T05:03:42.786Z"
             },
             {
               "$type": "Document",
@@ -71,8 +70,7 @@
               "RelativeToolTip": "API-FarmConnect\\Order.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAA3AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-04T05:03:26.775Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-07-04T05:03:26.775Z"
             },
             {
               "$type": "Document",
@@ -84,8 +82,7 @@
               "RelativeToolTip": "API-FarmConnect\\Controllers\\OrderHistoryController.cs",
               "ViewState": "AQIAAEgAAAAAAAAAAAAcwGgAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-04T05:01:46.911Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-07-04T05:01:46.911Z"
             },
             {
               "$type": "Document",
@@ -97,8 +94,7 @@
               "RelativeToolTip": "API-FarmConnect\\Controllers\\MarketController.cs",
               "ViewState": "AQIAAFEAAAAAAAAAAAAcwHEAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-01T12:31:04.088Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-07-01T12:31:04.088Z"
             },
             {
               "$type": "Document",
@@ -123,8 +119,7 @@
               "RelativeToolTip": "API-FarmConnect\\Controllers\\ProductsController.cs",
               "ViewState": "AQIAANUAAAAAAAAAAAAmwAwAAAA/AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-01T04:54:51.119Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-07-01T04:54:51.119Z"
             },
             {
               "$type": "Document",
@@ -136,8 +131,7 @@
               "RelativeToolTip": "API-FarmConnect\\Controllers\\UsersController.cs",
               "ViewState": "AQIAAGUAAAAAAAAAAAAcwHQAAAAhAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-25T06:46:04.183Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-06-25T06:46:04.183Z"
             }
           ]
         }
