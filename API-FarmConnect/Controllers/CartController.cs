@@ -25,7 +25,7 @@ namespace API_FarmConnect.Controllers
                     await connection.OpenAsync();
                     var getCartSql = @"
                         SELECT c.CartId, c.UserId, c.ProductId, c.Quantity, c.CreatedAt, 
-                               p.ProductName, p.ProductDescription, p.ProductPrice, p.ProductMeasureType, p.ProductImage
+                               p.ProductName, p.ProductDescription, p.SellingPrice, p.ProductMeasureType, p.ProductImage
                         FROM Cart c
                         JOIN Products p ON c.ProductId = p.ProductId
                         WHERE c.UserId = @UserId";
@@ -46,7 +46,7 @@ namespace API_FarmConnect.Controllers
                                     CreatedAt = reader.GetDateTime(reader.GetOrdinal("CreatedAt")),
                                     ProductName = reader.GetString(reader.GetOrdinal("ProductName")),
                                     ProductDescription = reader.GetString(reader.GetOrdinal("ProductDescription")),
-                                    ProductPrice = reader.GetDecimal(reader.GetOrdinal("ProductPrice")),
+                                    ProductPrice = reader.GetDecimal(reader.GetOrdinal("SellingPrice")),
                                     ProductMeasureType = reader.GetString(reader.GetOrdinal("ProductMeasureType")),
                                     ProductImage = reader.GetString(reader.GetOrdinal("ProductImage"))
                                 });
@@ -176,7 +176,7 @@ namespace API_FarmConnect.Controllers
                     // Calculate total amount from cart
                     var totalAmount = 0.0;
                     var getOrderItemsSql = @"
-                SELECT c.ProductId, c.Quantity, p.ProductPrice
+                SELECT c.ProductId, c.Quantity, p.SellingPrice
                 FROM Cart c
                 JOIN Products p ON c.ProductId = p.ProductId
                 WHERE c.UserId = @UserId";
@@ -192,7 +192,7 @@ namespace API_FarmConnect.Controllers
                             {
                                 var productId = reader.GetInt64(reader.GetOrdinal("ProductId"));
                                 var quantity = reader.GetDecimal(reader.GetOrdinal("Quantity"));
-                                var price = reader.GetDecimal(reader.GetOrdinal("ProductPrice"));
+                                var price = reader.GetDecimal(reader.GetOrdinal("SellingPrice"));
 
                                 orderItems.Add(new OrderItem
                                 {

@@ -5,7 +5,8 @@
         public long ProductId { get; set; }
         public string ProductName { get; set; }
         public string ProductDescription { get; set; }
-        public decimal ProductPrice { get; set; }
+        public decimal BuyingPrice { get; set; }
+        public decimal SellingPrice { get; set; }
         public long ProductTypeId { get; set; }
         public string ProductMeasureType { get; set; }
         public string ProductImage { get; set; }

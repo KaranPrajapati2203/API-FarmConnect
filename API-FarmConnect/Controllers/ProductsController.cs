@@ -38,7 +38,8 @@ namespace API_FarmConnect.Controllers
                                     ProductId = reader.GetInt64(reader.GetOrdinal("ProductId")),
                                     ProductName = reader.GetString(reader.GetOrdinal("ProductName")),
                                     ProductDescription = reader.GetString(reader.GetOrdinal("ProductDescription")),
-                                    ProductPrice = reader.GetDecimal(reader.GetOrdinal("ProductPrice")),
+                                    BuyingPrice = reader.GetDecimal(reader.GetOrdinal("BuyingPrice")),
+                                    SellingPrice = reader.GetDecimal(reader.GetOrdinal("SellingPrice")),
                                     ProductTypeId = reader.GetInt64(reader.GetOrdinal("ProductTypeId")),
                                     ProductMeasureType = reader.GetString(reader.GetOrdinal("ProductMeasureType")),
                                     ProductImage = reader.GetString(reader.GetOrdinal("ProductImage")),
@@ -84,7 +85,8 @@ namespace API_FarmConnect.Controllers
                                     ProductId = reader.GetInt64(reader.GetOrdinal("ProductId")),
                                     ProductName = reader.GetString(reader.GetOrdinal("ProductName")),
                                     ProductDescription = reader.GetString(reader.GetOrdinal("ProductDescription")),
-                                    ProductPrice = reader.GetDecimal(reader.GetOrdinal("ProductPrice")),
+                                    BuyingPrice = reader.GetDecimal(reader.GetOrdinal("BuyingPrice")),
+                                    SellingPrice = reader.GetDecimal(reader.GetOrdinal("SellingPrice")),
                                     ProductTypeId = reader.GetInt64(reader.GetOrdinal("ProductTypeId")),
                                     ProductMeasureType = reader.GetString(reader.GetOrdinal("ProductMeasureType")),
                                     ProductImage = reader.GetString(reader.GetOrdinal("ProductImage")),
@@ -120,13 +122,14 @@ namespace API_FarmConnect.Controllers
                 {
                     await connection.OpenAsync();
 
-                    var insertProductSql = "INSERT INTO Products (ProductName, ProductDescription, ProductPrice, ProductTypeId, ProductMeasureType, ProductImage, MaxQuantity, AvailableQuantity, IsNeeded, IsAvailable) " +
-                                            "VALUES (@ProductName, @ProductDescription, @ProductPrice, @ProductTypeId, @ProductMeasureType, @ProductImage, @MaxQuantity, @AvailableQuantity, @IsNeeded, @IsAvailable)";
+                    var insertProductSql = "INSERT INTO Products (ProductName, ProductDescription, BuyingPrice, SellingPrice, ProductTypeId, ProductMeasureType, ProductImage, MaxQuantity, AvailableQuantity, IsNeeded, IsAvailable) " +
+                         "VALUES (@ProductName, @ProductDescription, @BuyingPrice, @SellingPrice, @ProductTypeId, @ProductMeasureType, @ProductImage, @MaxQuantity, @AvailableQuantity, @IsNeeded, @IsAvailable)";
                     using (var cmd = new NpgsqlCommand(insertProductSql, connection))
                     {
                         cmd.Parameters.AddWithValue("@ProductName", product.ProductName);
                         cmd.Parameters.AddWithValue("@ProductDescription", product.ProductDescription);
-                        cmd.Parameters.AddWithValue("@ProductPrice", product.ProductPrice);
+                        cmd.Parameters.AddWithValue("@BuyingPrice", product.BuyingPrice);
+                        cmd.Parameters.AddWithValue("@SellingPrice", product.SellingPrice);
                         cmd.Parameters.AddWithValue("@ProductTypeId", product.ProductTypeId);
                         cmd.Parameters.AddWithValue("@ProductMeasureType", product.ProductMeasureType);
                         cmd.Parameters.AddWithValue("@ProductImage", product.ProductImage);
@@ -156,15 +159,16 @@ namespace API_FarmConnect.Controllers
                 {
                     await connection.OpenAsync();
 
-                    var updateProductSql = "UPDATE Products SET ProductName = @ProductName, ProductDescription = @ProductDescription, ProductPrice = @ProductPrice, ProductTypeId = @ProductTypeId, " +
-                                           "ProductMeasureType = @ProductMeasureType, ProductImage = @ProductImage, MaxQuantity = @MaxQuantity, AvailableQuantity = @AvailableQuantity, IsNeeded = @IsNeeded, IsAvailable = @IsAvailable " +
-                                           "WHERE ProductId = @ProductId AND IsDeleted = FALSE";
+                    var updateProductSql = "UPDATE Products SET ProductName = @ProductName, ProductDescription = @ProductDescription, BuyingPrice = @BuyingPrice, SellingPrice = @SellingPrice, ProductTypeId = @ProductTypeId, " +
+                        "ProductMeasureType = @ProductMeasureType, ProductImage = @ProductImage, MaxQuantity = @MaxQuantity, AvailableQuantity = @AvailableQuantity, IsNeeded = @IsNeeded, IsAvailable = @IsAvailable " +
+                        "WHERE ProductId = @ProductId AND IsDeleted = FALSE";
                     using (var cmd = new NpgsqlCommand(updateProductSql, connection))
                     {
                         cmd.Parameters.AddWithValue("@ProductId", id);
                         cmd.Parameters.AddWithValue("@ProductName", product.ProductName);
                         cmd.Parameters.AddWithValue("@ProductDescription", product.ProductDescription);
-                        cmd.Parameters.AddWithValue("@ProductPrice", product.ProductPrice);
+                        cmd.Parameters.AddWithValue("@BuyingPrice", product.BuyingPrice);
+                        cmd.Parameters.AddWithValue("@SellingPrice", product.SellingPrice);
                         cmd.Parameters.AddWithValue("@ProductTypeId", product.ProductTypeId);
                         cmd.Parameters.AddWithValue("@ProductMeasureType", product.ProductMeasureType);
                         cmd.Parameters.AddWithValue("@ProductImage", product.ProductImage);
@@ -246,7 +250,7 @@ namespace API_FarmConnect.Controllers
 
                     var listings = new List<ProductListing>();
 
-                    var getListingsSql = "SELECT pl.*, p.ProductName, p.ProductPrice, p.ProductImage, p.AvailableQuantity " +
+                    var getListingsSql = "SELECT pl.*, p.ProductName, p.BuyingPrice, p.ProductImage, p.AvailableQuantity " +
                                   "FROM ProductListings pl " +
                                   "JOIN Products p ON pl.ProductId = p.ProductId " +
                                   "WHERE pl.SellerId = @UserId AND pl.IsDeleted = FALSE";
@@ -265,7 +269,7 @@ namespace API_FarmConnect.Controllers
                                     SellerId = reader.GetInt64(reader.GetOrdinal("SellerId")),
                                     ProductId = reader.GetInt64(reader.GetOrdinal("ProductId")),
                                     ProductName = reader.GetString(reader.GetOrdinal("ProductName")),
-                                    ProductPrice = reader.GetDecimal(reader.GetOrdinal("ProductPrice")),
+                                    ProductPrice = reader.GetDecimal(reader.GetOrdinal("BuyingPrice")),
                                     ProductImage = reader.GetString(reader.GetOrdinal("ProductImage")),
                                     ProductMeasureType = reader.GetString(reader.GetOrdinal("ProductMeasureType")),
                                     ListingQuantity = reader.GetDecimal(reader.GetOrdinal("ListingQuantity")),

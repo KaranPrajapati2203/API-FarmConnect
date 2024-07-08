@@ -29,7 +29,7 @@ namespace API_FarmConnect.Controllers
                     var getOrderSql = @"
                     SELECT o.OrderId, o.UserId, o.OrderDate, o.TotalAmount, o.OrderStatus, o.CreatedAt,
                            oi.OrderItemId, oi.ProductId, oi.Quantity, oi.Price, oi.CreatedAt as OrderItemCreatedAt,
-                           p.ProductName, p.ProductDescription, p.ProductPrice, p.ProductMeasureType, p.ProductImage
+                           p.ProductName, p.ProductDescription, p.SellingPrice, p.ProductMeasureType, p.ProductImage
                     FROM Orders o
                     JOIN OrderItems oi ON o.OrderId = oi.OrderId
                     JOIN Products p ON oi.ProductId = p.ProductId
@@ -77,7 +77,7 @@ namespace API_FarmConnect.Controllers
                                     CreatedAt = reader.GetDateTime(reader.GetOrdinal("OrderItemCreatedAt")),
                                     ProductName = reader.GetString(reader.GetOrdinal("ProductName")),
                                     ProductDescription = reader.GetString(reader.GetOrdinal("ProductDescription")),
-                                    ProductPrice = reader.GetDecimal(reader.GetOrdinal("ProductPrice")),
+                                    ProductPrice = reader.GetDecimal(reader.GetOrdinal("SellingPrice")),
                                     ProductMeasureType = reader.GetString(reader.GetOrdinal("ProductMeasureType")),
                                     ProductImage = reader.GetString(reader.GetOrdinal("ProductImage"))
                                 };
