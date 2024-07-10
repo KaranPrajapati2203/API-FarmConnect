@@ -122,8 +122,12 @@ namespace API_FarmConnect.Controllers
                 {
                     await connection.OpenAsync();
 
-                    var insertProductSql = "INSERT INTO Products (ProductName, ProductDescription, BuyingPrice, SellingPrice, ProductTypeId, ProductMeasureType, ProductImage, MaxQuantity, AvailableQuantity, IsNeeded, IsAvailable) " +
-                         "VALUES (@ProductName, @ProductDescription, @BuyingPrice, @SellingPrice, @ProductTypeId, @ProductMeasureType, @ProductImage, @MaxQuantity, @AvailableQuantity, @IsNeeded, @IsAvailable)";
+                    //var insertProductSql = "INSERT INTO Products (ProductName, ProductDescription, BuyingPrice, SellingPrice, ProductTypeId, ProductMeasureType, ProductImage, MaxQuantity, AvailableQuantity, IsNeeded, IsAvailable) " +
+                    //     "VALUES (@ProductName, @ProductDescription, @BuyingPrice, @SellingPrice, @ProductTypeId, @ProductMeasureType, @ProductImage, @MaxQuantity, @AvailableQuantity, @IsNeeded, @IsAvailable)";
+
+                    var insertProductSql = "INSERT INTO Products (ProductName, ProductDescription, BuyingPrice, SellingPrice, ProductTypeId, ProductMeasureType, ProductImage) " +
+                         "VALUES (@ProductName, @ProductDescription, @BuyingPrice, @SellingPrice, @ProductTypeId, @ProductMeasureType, @ProductImage)";
+
                     using (var cmd = new NpgsqlCommand(insertProductSql, connection))
                     {
                         cmd.Parameters.AddWithValue("@ProductName", product.ProductName);
@@ -133,10 +137,10 @@ namespace API_FarmConnect.Controllers
                         cmd.Parameters.AddWithValue("@ProductTypeId", product.ProductTypeId);
                         cmd.Parameters.AddWithValue("@ProductMeasureType", product.ProductMeasureType);
                         cmd.Parameters.AddWithValue("@ProductImage", product.ProductImage);
-                        cmd.Parameters.AddWithValue("@MaxQuantity", product.MaxQuantity);
-                        cmd.Parameters.AddWithValue("@AvailableQuantity", product.AvailableQuantity);
-                        cmd.Parameters.AddWithValue("@IsNeeded", product.IsNeeded);
-                        cmd.Parameters.AddWithValue("@IsAvailable", product.IsAvailable);
+                        //cmd.Parameters.AddWithValue("@MaxQuantity", product.MaxQuantity);
+                        //cmd.Parameters.AddWithValue("@AvailableQuantity", product.AvailableQuantity);
+                        //cmd.Parameters.AddWithValue("@IsNeeded", product.IsNeeded);
+                        //cmd.Parameters.AddWithValue("@IsAvailable", product.IsAvailable);
 
                         await cmd.ExecuteNonQueryAsync();
 
@@ -159,8 +163,12 @@ namespace API_FarmConnect.Controllers
                 {
                     await connection.OpenAsync();
 
+                    //var updateProductSql = "UPDATE Products SET ProductName = @ProductName, ProductDescription = @ProductDescription, BuyingPrice = @BuyingPrice, SellingPrice = @SellingPrice, ProductTypeId = @ProductTypeId, " +
+                    //    "ProductMeasureType = @ProductMeasureType, ProductImage = @ProductImage, MaxQuantity = @MaxQuantity, AvailableQuantity = @AvailableQuantity, IsNeeded = @IsNeeded, IsAvailable = @IsAvailable " +
+                    //    "WHERE ProductId = @ProductId AND IsDeleted = FALSE";
+
                     var updateProductSql = "UPDATE Products SET ProductName = @ProductName, ProductDescription = @ProductDescription, BuyingPrice = @BuyingPrice, SellingPrice = @SellingPrice, ProductTypeId = @ProductTypeId, " +
-                        "ProductMeasureType = @ProductMeasureType, ProductImage = @ProductImage, MaxQuantity = @MaxQuantity, AvailableQuantity = @AvailableQuantity, IsNeeded = @IsNeeded, IsAvailable = @IsAvailable " +
+                        "ProductMeasureType = @ProductMeasureType, ProductImage = @ProductImage " +
                         "WHERE ProductId = @ProductId AND IsDeleted = FALSE";
                     using (var cmd = new NpgsqlCommand(updateProductSql, connection))
                     {
@@ -172,10 +180,10 @@ namespace API_FarmConnect.Controllers
                         cmd.Parameters.AddWithValue("@ProductTypeId", product.ProductTypeId);
                         cmd.Parameters.AddWithValue("@ProductMeasureType", product.ProductMeasureType);
                         cmd.Parameters.AddWithValue("@ProductImage", product.ProductImage);
-                        cmd.Parameters.AddWithValue("@MaxQuantity", product.MaxQuantity);
-                        cmd.Parameters.AddWithValue("@AvailableQuantity", product.AvailableQuantity);
-                        cmd.Parameters.AddWithValue("@IsNeeded", product.IsNeeded);
-                        cmd.Parameters.AddWithValue("@IsAvailable", product.IsAvailable);
+                        //cmd.Parameters.AddWithValue("@MaxQuantity", product.MaxQuantity);
+                        //cmd.Parameters.AddWithValue("@AvailableQuantity", product.AvailableQuantity);
+                        //cmd.Parameters.AddWithValue("@IsNeeded", product.IsNeeded);
+                        //cmd.Parameters.AddWithValue("@IsAvailable", product.IsAvailable);
 
                         var rowsAffected = await cmd.ExecuteNonQueryAsync();
                         if (rowsAffected > 0)

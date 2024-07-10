@@ -78,12 +78,34 @@ namespace API_FarmConnect.Controllers
 
                     // New queries for additional metrics
                     // 1. User Registration Over Time
+                    //    var userRegistrationOverTimeSql = @"
+                    //SELECT DATE_TRUNC('month', CreatedAt) AS RegistrationMonth, COUNT(*) AS UserCount
+                    //FROM Users
+                    //WHERE IsDeleted = FALSE
+                    //GROUP BY DATE_TRUNC('month', CreatedAt)
+                    //ORDER BY RegistrationMonth";
+
+                    //    var userRegistrationOverTime = new List<object>();
+                    //    using (var cmd = new NpgsqlCommand(userRegistrationOverTimeSql, connection))
+                    //    {
+                    //        using (var reader = await cmd.ExecuteReaderAsync())
+                    //        {
+                    //            while (await reader.ReadAsync())
+                    //            {
+                    //                userRegistrationOverTime.Add(new
+                    //                {
+                    //                    RegistrationMonth = reader.GetDateTime(0),
+                    //                    UserCount = reader.GetInt32(1)
+                    //                });
+                    //            }
+                    //        }
+                    //    }
                     var userRegistrationOverTimeSql = @"
-                SELECT DATE_TRUNC('month', CreatedAt) AS RegistrationMonth, COUNT(*) AS UserCount
+                SELECT DATE_TRUNC('day', CreatedAt) AS RegistrationDay, COUNT(*) AS UserCount
                 FROM Users
                 WHERE IsDeleted = FALSE
-                GROUP BY DATE_TRUNC('month', CreatedAt)
-                ORDER BY RegistrationMonth";
+                GROUP BY DATE_TRUNC('day', CreatedAt)
+                ORDER BY RegistrationDay";
 
                     var userRegistrationOverTime = new List<object>();
                     using (var cmd = new NpgsqlCommand(userRegistrationOverTimeSql, connection))
@@ -94,7 +116,7 @@ namespace API_FarmConnect.Controllers
                             {
                                 userRegistrationOverTime.Add(new
                                 {
-                                    RegistrationMonth = reader.GetDateTime(0),
+                                    RegistrationDay = reader.GetDateTime(0),
                                     UserCount = reader.GetInt32(1)
                                 });
                             }
@@ -126,12 +148,34 @@ namespace API_FarmConnect.Controllers
                     }
 
                     // 3. Orders Over Time
+                    //    var ordersOverTimeSql = @"
+                    //SELECT DATE_TRUNC('month', OrderDate) AS OrderMonth, COUNT(*) AS OrderCount
+                    //FROM Orders
+                    //WHERE IsDeleted = FALSE
+                    //GROUP BY DATE_TRUNC('month', OrderDate)
+                    //ORDER BY OrderMonth";
+
+                    //    var ordersOverTime = new List<object>();
+                    //    using (var cmd = new NpgsqlCommand(ordersOverTimeSql, connection))
+                    //    {
+                    //        using (var reader = await cmd.ExecuteReaderAsync())
+                    //        {
+                    //            while (await reader.ReadAsync())
+                    //            {
+                    //                ordersOverTime.Add(new
+                    //                {
+                    //                    OrderMonth = reader.GetDateTime(0),
+                    //                    OrderCount = reader.GetInt32(1)
+                    //                });
+                    //            }
+                    //        }
+                    //    }
                     var ordersOverTimeSql = @"
-                SELECT DATE_TRUNC('month', OrderDate) AS OrderMonth, COUNT(*) AS OrderCount
+                SELECT DATE_TRUNC('day', OrderDate) AS OrderDay, COUNT(*) AS OrderCount
                 FROM Orders
                 WHERE IsDeleted = FALSE
-                GROUP BY DATE_TRUNC('month', OrderDate)
-                ORDER BY OrderMonth";
+                GROUP BY DATE_TRUNC('day', OrderDate)
+                ORDER BY OrderDay";
 
                     var ordersOverTime = new List<object>();
                     using (var cmd = new NpgsqlCommand(ordersOverTimeSql, connection))
@@ -142,7 +186,7 @@ namespace API_FarmConnect.Controllers
                             {
                                 ordersOverTime.Add(new
                                 {
-                                    OrderMonth = reader.GetDateTime(0),
+                                    OrderDay = reader.GetDateTime(0),
                                     OrderCount = reader.GetInt32(1)
                                 });
                             }

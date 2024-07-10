@@ -47,14 +47,25 @@ CREATE TABLE Products (
     ProductTypeId BIGINT NOT NULL,
     ProductMeasureType VARCHAR(10) NOT NULL,
     ProductImage VARCHAR(255),
-    MaxQuantity INT NOT NULL,
-    AvailableQuantity INT NOT NULL,
+    --MaxQuantity INT NOT NULL,
+    --AvailableQuantity INT NOT NULL,
+	MaxQuantity DECIMAL(10, 2) NOT NULL DEFAULT 500,
+    AvailableQuantity DECIMAL(10, 2) NOT NULL DEFAULT 500,
     CreatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 	IsAvailable BOOLEAN DEFAULT TRUE,
 	IsNeeded BOOLEAN DEFAULT TRUE,
     IsDeleted BOOLEAN DEFAULT FALSE,
     FOREIGN KEY (ProductTypeId) REFERENCES ProductTypes(ProductTypeId)
 );
+-- Change data type to DECIMAL(10, 2) and set default value for MaxQuantity
+ALTER TABLE Products
+ALTER COLUMN MaxQuantity TYPE DECIMAL(10, 2),
+ALTER COLUMN MaxQuantity SET DEFAULT 500;
+
+-- Change data type to DECIMAL(10, 2) and set default value for AvailableQuantity
+ALTER TABLE Products
+ALTER COLUMN AvailableQuantity TYPE DECIMAL(10, 2),
+ALTER COLUMN AvailableQuantity SET DEFAULT 500;
 
 INSERT INTO Products (ProductName, ProductDescription, BuyingPrice, SellingPrice, ProductTypeId, ProductMeasureType, ProductImage, MaxQuantity, AvailableQuantity, IsAvailable)
 VALUES
@@ -225,3 +236,116 @@ CREATE TABLE OrderStatusHistory (
     FOREIGN KEY (OrderId) REFERENCES Orders(OrderId),
     FOREIGN KEY (StatusId) REFERENCES OrderStatuses(OrderStatusId)
 );
+
+-----------------------------------------------------------------------------------------------------------
+
+UPDATE Products
+SET
+    ProductName = CASE ProductId
+        WHEN 1 THEN 'Organic Apples'
+        WHEN 2 THEN 'Fresh Carrots'
+        WHEN 3 THEN 'Dairy Milk'
+        WHEN 4 THEN 'Fresh Strawberries'
+        WHEN 5 THEN 'Organic Broccoli'
+        WHEN 6 THEN 'Fresh Oranges'
+        WHEN 7 THEN 'Organic Tomatoes'
+        WHEN 8 THEN 'Fresh Spinach'
+        WHEN 9 THEN 'Grapes'
+        WHEN 13 THEN 'Potato'
+    END,
+    ProductDescription = CASE ProductId
+        WHEN 1 THEN 'Fresh and juicy organic apples from local farms.'
+        WHEN 2 THEN 'Crisp and sweet carrots grown with love.'
+        WHEN 3 THEN 'Pure and fresh milk from grass-fed cows.'
+        WHEN 4 THEN 'Sweet and juicy strawberries freshly picked.'
+        WHEN 5 THEN 'Healthy and fresh organic broccoli.'
+        WHEN 6 THEN 'Fresh and juicy oranges.'
+        WHEN 7 THEN 'Ripe and juicy organic tomatoes.'
+        WHEN 8 THEN 'Leafy green spinach, rich in nutrients.'
+        WHEN 9 THEN 'Sweet and juicy organic grapes.'
+        WHEN 13 THEN 'Fresh and organic potatoes'
+    END,
+    BuyingPrice = CASE ProductId
+        WHEN 1 THEN 108
+        WHEN 2 THEN 81
+        WHEN 3 THEN 45
+        WHEN 4 THEN 135
+        WHEN 5 THEN 72
+        WHEN 6 THEN 180
+        WHEN 7 THEN 63
+        WHEN 8 THEN 54
+        WHEN 9 THEN 126
+        WHEN 13 THEN 20
+    END,
+    SellingPrice = CASE ProductId
+        WHEN 1 THEN 120
+        WHEN 2 THEN 90
+        WHEN 3 THEN 50
+        WHEN 4 THEN 150
+        WHEN 5 THEN 80
+        WHEN 6 THEN 200
+        WHEN 7 THEN 70
+        WHEN 8 THEN 60
+        WHEN 9 THEN 140
+        WHEN 13 THEN 30
+    END,
+    ProductTypeId = CASE ProductId
+        WHEN 1 THEN 1
+        WHEN 2 THEN 2
+        WHEN 3 THEN 3
+        WHEN 4 THEN 1
+        WHEN 5 THEN 2
+        WHEN 6 THEN 1
+        WHEN 7 THEN 2
+        WHEN 8 THEN 2
+        WHEN 9 THEN 1
+        WHEN 13 THEN 2
+    END,
+    ProductMeasureType = CASE ProductId
+        WHEN 1 THEN 'kg'
+        WHEN 2 THEN 'kg'
+        WHEN 3 THEN 'L'
+        WHEN 4 THEN 'kg'
+        WHEN 5 THEN 'kg'
+        WHEN 6 THEN 'kg'
+        WHEN 7 THEN 'kg'
+        WHEN 8 THEN 'kg'
+        WHEN 9 THEN 'kg'
+        WHEN 13 THEN 'kg'
+    END,
+    ProductImage = CASE ProductId
+        WHEN 1 THEN 'https://www.shimlafarms.com/cdn/shop/products/Redapple3.png?v=1675785288&width=1445'
+        WHEN 2 THEN 'https://images.fineartamerica.com/images/artworkimages/mediumlarge/2/usa-new-york-city-carrots-for-sale-tetra-images.jpg'
+        WHEN 3 THEN 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQFLbH-mTn8P736RPcSHkV16rhLF1vZvStQMg&s'
+        WHEN 4 THEN 'https://d3fwccq2bzlel7.cloudfront.net/Pictures/480xany/5/8/8/35588_2_1203853_e.jpg'
+        WHEN 5 THEN 'https://s.alicdn.com/@sc04/kf/A4f577b2659534d3292fd568d359d9cc5j.jpg_300x300.jpg'
+        WHEN 6 THEN 'https://tacomaboys.com/wp-content/uploads/2020/04/TB-27-8701-1024x588.jpg'
+        WHEN 7 THEN 'https://i.cdn.newsbytesapp.com/images/l29720230821154142.jpeg'
+        WHEN 8 THEN 'https://www.bigbasket.com/media/uploads/p/xxl/40200226_1-farmogo-spinach-hydroponically-grown.jpg'
+        WHEN 9 THEN 'https://upload.wikimedia.org/wikipedia/commons/3/36/Kyoho-grape.jpg'
+        WHEN 13 THEN 'https://m.media-amazon.com/images/I/313dtY-LOEL._AC_UF1000,1000_QL80_.jpg'
+    END,
+    MaxQuantity = CASE ProductId
+        WHEN 1 THEN 500
+        WHEN 2 THEN 507
+        WHEN 3 THEN 500
+        WHEN 4 THEN 500
+        WHEN 5 THEN 500
+        WHEN 6 THEN 500
+        WHEN 7 THEN 500
+        WHEN 8 THEN 500
+        WHEN 9 THEN 500
+        WHEN 13 THEN 500
+    END,
+    AvailableQuantity = CASE ProductId
+        WHEN 1 THEN 510
+        WHEN 2 THEN 507
+        WHEN 3 THEN 500
+        WHEN 4 THEN 500
+        WHEN 5 THEN 500
+        WHEN 6 THEN 500
+        WHEN 7 THEN 500
+        WHEN 8 THEN 500
+        WHEN 9 THEN 500
+        WHEN 13 THEN 500
+    END;
