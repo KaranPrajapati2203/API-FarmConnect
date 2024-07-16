@@ -1431,19 +1431,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\karan.prajapati\\.nuget\\packages\\": {}
+    "C:\\Users\\KARAN\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\API-FarmConnect\\API-FarmConnect\\API-FarmConnect.csproj",
+      "projectUniqueName": "C:\\Users\\KARAN\\Desktop\\Personal Project\\API-FarmConnect\\API-FarmConnect\\API-FarmConnect.csproj",
       "projectName": "API-FarmConnect",
-      "projectPath": "D:\\API-FarmConnect\\API-FarmConnect\\API-FarmConnect.csproj",
-      "packagesPath": "C:\\Users\\karan.prajapati\\.nuget\\packages\\",
-      "outputPath": "D:\\API-FarmConnect\\API-FarmConnect\\obj\\",
+      "projectPath": "C:\\Users\\KARAN\\Desktop\\Personal Project\\API-FarmConnect\\API-FarmConnect\\API-FarmConnect.csproj",
+      "packagesPath": "C:\\Users\\KARAN\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\KARAN\\Desktop\\Personal Project\\API-FarmConnect\\API-FarmConnect\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\karan.prajapati\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\KARAN\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -1451,6 +1451,7 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -1514,7 +1515,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.202/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.300/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
